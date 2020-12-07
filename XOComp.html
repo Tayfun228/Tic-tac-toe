@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .con{
+        position: absolute;
+        left: 50%;
+        top: 50%;        
+    }
+    .button{
+        width: 50px;
+        height: 50px;
+        margin:  2px 0 2px 0;
+        color: transparent;
+    }
+</style>
+<body>
+    <div class="con">
+        <div>
+            <button onclick="check(0,0)" class="button" id="00">T</button>
+            <button onclick="check(0,1)" class="button" id="01">T</button>
+            <button onclick="check(0,2)" class="button" id="02">T</button>
+        </div>
+        <div>
+            <button onclick="check(1,0)" class="button" id="10">T</button>
+            <button onclick="check(1,1)" class="button" id="11">T</button>
+            <button onclick="check(1,2)" class="button" id="12">T</button>
+        </div>
+        <div>
+            <button onclick="check(2,0)" class="button" id="20">T</button>
+            <button onclick="check(2,1)" class="button" id="21">T</button>
+            <button onclick="check(2,2)" class="button" id="22">T</button>
+        </div>
+    </div>
+
+    <script>
+        var t=1;
+        var ar=[[3,3,3],[3,3,3],[3,3,3]];
+        function check(a,b)
+        {   
+            //////////////// goruntu
+            var g=document.getElementById(`${a}${b}`);
+            var P,i,S=0,T,m=3,SO=0;
+            var ad,bd;
+            var add,bdd,at,bt;
+            var ag,bg;
+            var bol=true;
+            g.innerText="X";
+            g.style.color="red";
+            P=1;
+            T="X";
+            g.disabled=true;
+
+
+            /////////////// CheckX
+            ar[a][b]=P;
+            for(i=0;i<3;i++) ////row
+            {
+                if(ar[a][i]==P)
+                {
+                    S=S+1;
+                }
+                else{
+                    break;
+                }
+            }
+            if(S==3)
+            {
+                alert(`Qalib: ${T}`)
+            }
+            else{  
+                S=0;     ////column
+                for(i=0;i<3;i++) 
+                {
+                    if(ar[i][b]==P)
+                    {
+                        S=S+1;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(S==3)
+                {
+                    alert(`Qalib: ${T}`)
+                }
+                else{
+                    S=0;
+                    for(i=0;i<3;i++) ////row
+                    {
+                        if(ar[i][i]==P)
+                        {
+                            S=S+1;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    if(S==3)
+                    {
+                        alert(`Qalib: ${T}`)
+                    }
+                    else{
+                        S=0;
+                        for(i=0;i<3;i++) ////row
+                        {
+                            m-=1;
+                            if(ar[m][i]==P)
+                            {
+                                S=S+1;
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                        if(S==3)
+                        {
+                            alert(`Qalib: ${T}`)
+                        }
+                        else{
+                            m=3;
+                            S=0;
+                        }
+                    }
+                }
+            }
+
+
+
+            S=0;
+            SO=0;
+            //////////////////////////////////////////////////////////////////////////////win
+            for(u=0;u<3;u++)
+            {
+                S=0;
+                SO=0;
+                for(y=0;y<3;y++)    
+                {
+                    
+                    if(ar[u][y]==P)
+                    {    
+
+                        S=S+1;
+                    }
+                    else if(ar[u][y]==0){
+                        SO=SO+1;
+                    }
+                    else if((ar[u][y]!=P) && (ar[u][y]!=0)){
+                        ad=u;
+                        bd=y;                   
+                    }
+                    
+                }
+                if(SO==2 && S==0)
+                {
+                    bol=false;
+                    break;
+                }
+                S=0;
+                SO=0;
+            }
+            if(bol){
+                for(y=0;y<3;y++)
+                {
+                    S=0;
+                    SO=0;
+                    for(u=0;u<3;u++)    
+                    {
+                        
+                        if(ar[u][y]==P)
+                        {    
+
+                            S=S+1;
+                        }
+                        else if(ar[u][y]==0){
+                            SO=SO+1;
+                        }
+                        else if((ar[u][y]!=P) && (ar[u][y]!=0)){
+                            ad=u;
+                            bd=y;                   
+                        }
+                        
+                    }
+                    if(SO==2 && S==0)
+                    {
+                        bol=false;
+                        break;
+                    }
+                    S=0;
+                    SO=0;
+                }
+            }
+
+            if(bol)
+            {
+                S=0;
+                SO=0;
+                for(i=0;i<3;i++) ////row
+                {
+                    if(ar[i][i]==P)
+                    {
+                        S=S+1;
+                    }
+                    else if(ar[i][i]==0){
+                        SO=SO+1;
+                    } 
+                    else if((ar[i][i]!=P) && (ar[i][i]!=0)){
+                        ad=i;
+                        bd=i;               
+                    } 
+                }
+                if(SO==2 && S==0)
+                {
+                    bol=false;
+                }
+                S=0;
+                SO=0;
+
+                if(bol){
+                    S=0;
+                    SO=0;
+                    for(i=0;i<3;i++) ////row
+                    {
+                        m-=1;
+                        if(ar[m][i]==P)
+                        {
+                            S=S+1;
+                        }
+                        else if(ar[m][i]==0){
+                            SO=SO+1;
+                        }
+                            
+                        else if((ar[m][i]!=P) && (ar[m][i]!=0)){
+                            ad=m;
+                            bd=i;               
+                        }
+                    }
+                    if(SO==2 && S==0)
+                    {
+                        bol=false;
+                        
+                    }
+                    S=0;
+                    SO=0;
+                    
+
+
+
+
+                    
+                    if(bol) ///////////////////////////preventor
+                    {
+                        
+                        for(u=0;u<3;u++)
+                        {
+                            S=0;
+                            SO=0;
+                            for(y=0;y<3;y++)    
+                            {
+                                
+                                if(ar[u][y]==P)
+                                {   
+                                    S=S+1;
+                                }
+                                else if(ar[u][y]==0){
+                                    SO=SO+1;
+                                }
+                                else if(ar[u][y]!=0){
+                                    add=u;
+                                    bdd=y;                   
+                                }         
+                            }
+                            if(S==2 && (SO+S)!=3)
+                            {
+                                ad=add;
+                                bd=bdd;
+                                bol=false;
+                                break;
+                            }
+                            S=0;
+                            SO=0;
+                        }
+                        if(bol){
+                            for(y=0;y<3;y++)
+                            {
+                                for(u=0;u<3;u++)    
+                                {
+                                    
+                                    if(ar[u][y]==P)
+                                    {    
+                                        S=S+1;
+                                    }
+                                    else if(ar[u][y]==0){
+                                        SO=SO+1;
+                                    }
+                                    else if(ar[u][y]!=0){
+                                        add=u;
+                                        bdd=y;                   
+                                    }
+                                    
+                                }
+                                if(S==2 && (SO+S)!=3)
+                                {
+                                    bol=false;
+                                    ad=add;
+                                    bd=bdd;
+                                    break;
+                                }
+                                S=0;
+                                SO=0;
+                            }
+                        }
+                        if(bol){
+                            S=0;
+                            SO=0;
+                            for(i=0;i<3;i++) ////row
+                            {
+                                if(ar[i][i]==P)
+                                {
+                                    S=S+1;
+                                }
+                                else if(ar[i][i]==0){
+                                    SO=SO+1;
+                                }   
+                                else if(ar[i][i]!=0){
+                                    add=i;
+                                    bdd=i;                      
+                                }
+                            }
+                            if(S==2 && (SO+S)!=3)
+                            {
+                                bol=false;
+                                ad=add;
+                                bd=bdd;
+                            }
+                            else{
+                                m=3;
+                                S=0;
+                                SO=0;
+                                for(i=0;i<3;i++) ////row
+                                {
+                        
+                                    m-=1;
+                                    if(ar[m][i]==P)
+                                    {
+                                        S=S+1;
+                                    }
+                                    else if(ar[m][i]==0){
+                                        SO=SO+1;
+                                    }
+                                        
+                                    else if(ar[m][i]!=0){
+                                        add=m;
+                                        bdd=i;
+                                            
+
+                                    }
+                                }
+                                if(S==2 && (SO+S)!=3)
+                                {
+                                    bol=false;
+                                    ad=add;
+                                    bd=bdd;                             
+                                        
+                                }
+                                else{
+                                    m=3;
+                                    S=0;
+                                    SO=0;
+                                }
+                            }
+                        }
+                    }
+///////////////////////////////////////////////////////////////////////////ATCK
+
+                    if(bol && ar[1][1]!=1){
+                        if(ar[1][1]==3)
+                        {
+                            ad=1;
+                            bd=1;
+                        }
+                        else{
+                            for(var u=0;u<3;u++)
+                            {
+                                for(var y=0;y<3;y++)
+                                {
+
+                                    if(ar[u][y]==P)
+                                    {   
+                                        ag=u;
+                                        bg=y;
+                                        S=S+1;
+
+                                    }
+                                    else if(ar[u][y]==0){
+                                        SO=SO+1;
+                                    }
+                                    else if(ar[u][y]!=0 && u==ag &&((bg==y+1) || (bg==y-1))  ){
+                                        ad=u;
+                                        bd=y;    
+    
+                                    }                        
+                                }
+                            }
+                        }
+
+
+
+                    }
+
+                }
+            }
+
+            S=0;
+            SO=0;
+               
+            
+            
+            
+
+            //////////////////////////////////////////////
+
+            var g=document.getElementById(`${ad}${bd}`);
+            g.innerText="O";
+            g.style.color="green";
+            P=0;
+            T="O";
+            g.disabled=true;
+            ar[ad][bd]=P;
+            a=ad;
+            b=bd;
+            S=0;
+            SO=0;
+            
+            ///////////////////////////////////////////////checkO
+            for(i=0;i<3;i++) ////row
+            {
+               // alert(a+" "+i);
+                if(ar[a][i]==0)
+                {
+                   // alert(a+" "+i);
+                  //  alert(ar[a][i]);
+                    S=S+1;
+                  //  alert(S);
+                }
+                else{
+                    break;
+                }
+            }
+            if(S==3)
+            {
+                alert(`Qalib: ${T}`)
+            }
+            else{  
+                
+                S=0;     ////column
+                for(i=0;i<3;i++) 
+                {
+                    if(ar[i][b]==0)
+                    {
+                        S=S+1;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(S==3)
+                {
+                    alert(`Qalib: ${T}`);
+                }
+                else{
+                    S=0;
+                    for(i=0;i<3;i++) ////row
+                    {
+                        if(ar[i][i]==0)
+                        {
+                            S=S+1;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    if(S==3)
+                    {
+                        alert(`Qalib: ${T}`);
+                    }
+                    else{
+                        S=0;
+                        m=3;
+                        //alert("isledi");
+                        for(i=0;i<3;i++) ////row
+                        {
+                            m-=1;
+                          //  alert(m+" "+i);
+                          //  alert(ar[m][i]+" mi");
+                            if(ar[m][i]==0)
+                            {
+                              //  alert(m+" "+i);
+                             //   alert(ar[m][i]+" mi");
+                             //   alert(S+"SS");
+                                S=S+1;
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                        if(S==3)
+                        {
+                            alert(`Qalib: ${T}`);
+                        }
+                        else{
+                            m=3;
+                            S=0;
+                        }
+                    }
+                }
+            }
+
+
+
+            S=0;
+
+            
+
+
+        }
+
+
+        
+    </script>
+</body>
+</html>
